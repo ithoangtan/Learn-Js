@@ -1,29 +1,57 @@
-function sum(a, b) {
-  return a + b;
-}
-
-sum(1, 2);
-
-var sum2 = function(a, b) {
-  return a + b;
+var a = {
+  foo: "bar",
+  run: function() {
+    setTimeout(function() {
+      console.log(this.foo);
+    }, 1000);
+  }
 };
 
-var sum = (a, b) => {
-  return a + b;
+a.run(); //undefine:
+//this của hàm bên trong không thừa
+// kế this của thằng ngoài
+
+//Cách sửa:
+
+var a = {
+  foo: "bar",
+  run: function() {
+    setTimeout(
+      function() {
+        console.log(this.foo);
+      }.bind(this),
+      1000
+    );
+  }
 };
 
-var sum = (a, b) => a + b;
+var a = {
+  foo: "bar",
+  run: function() {
+    setTimeout(
+      function() {
+        console.log(this.foo);
+      }.bind(a),
+      1000
+    );
+  }
+};
 
-var sum = a => a * a;
+var a = {
+  foo: "bar",
+  run: function() {
+    var that = this;
+    setTimeout(function() {
+      console.log(that.foo);
+    }, 1000);
+  }
+};
 
-var arr = [1, 2, 3];
-
-arr.map(function(x) {
-  return x * x;
-});
-// 1 tham số thì không cần mở ngoặc luôn
-var sum = (a, b) => a + b;
-arr.map(x => x * x);
-
-
-console.log(arr);
+var a = {
+  foo: "bar",
+  run: function() {
+    setTimeout(() => {
+      console.log(this.foo);
+    }, 1000);
+  }
+};
