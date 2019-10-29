@@ -14,6 +14,12 @@ class Hero {
   }
 }
 
+const heroA = new Hero("A", 100, 10, 10);
+const heroB = new Hero("B", 200, 5);
+console.log({ heroA, heroB });
+heroA.acttack(heroB);
+console.log({ heroA, heroB });
+
 class RangeHero extends Hero {
   constructor(name, hp, damage, range) {
     super(name, hp, damage);
